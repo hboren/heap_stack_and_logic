@@ -81,6 +81,35 @@ Node* llfilter(Node* head, Comp pred)
     //*********************************************
     // Provide your implementation below
     //*********************************************
+    //when have recursed to the end of the list (aka null), 
+		//begin returning back up
+		if(head == nullptr){
+        return head;
+    }
+		//head recursion
+    Node* temp = llfilter(head->next, pred);
+		//if comparison is false, aka we want to keep the value:
+    if(pred(head->val) == false){
+				//if this is the last element, just return its address
+				//up to keep track of it
+        if(head->next == nullptr){
+            return head;
+        }
+				//otherwise set this elements next to temp, the most recent
+				//item that we want to keep and return the current elements
+				//address for the next kept node to use, or to return to main
+        else{
+            head->next = temp;
+            return head;
+        }
+    }
+		//if we don't want to keep the node, delete it and return
+		//the last returned node address (aka most recent node being kept)
+    else{
+				Node* temp_to_del = head;
+				delete temp_to_del;
+        return temp;
+    }
 
 
 }
