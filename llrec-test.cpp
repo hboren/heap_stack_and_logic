@@ -67,7 +67,12 @@ void dealloc(Node* head)
 //   function object struct declarations
 // -----------------------------------------------
 
-
+//returns true if a node should be removed (KEEP EVENS)!
+//if even, return false aka keep, if
+struct isOdd {
+    bool operator()(int x) { return x % 2 == 0; } };
+struct isEven {
+    bool operator()(int x) { return x % 2 == 1; } };
 
 
 
@@ -81,14 +86,48 @@ int main(int argc, char* argv[])
     // -----------------------------------------------
     // Feel free to update any code below this point
     // -----------------------------------------------
-    Node* head = readList(argv[1]);
+    Node* head1 = readList(argv[1]);
+    Node* head2 = readList(argv[1]);
+		Node* head3 = readList(argv[1]);
     cout << "Original list: ";
-    print(head);
+    print(head1);
 
     // Test out your linked list code
+    //testing llpivot
+    Node* smaller = head3;
+    Node* larger = head3;
+    cout<<"testing with garbage values: " << endl;
+    print(smaller);
+    print(larger);
+    cout << endl;
+    llpivot(head3, smaller, larger, 5);
+    cout << "Smaller list (pivot 5): ";
+    print(smaller);
+    cout << "Larger list (pivot 5): ";
+    print(larger);
 
+    if(head3 == nullptr){
+        cout << "head is null" << endl;
+    }
+    else{
+        cout << "head is not null" << endl;
+    }
 
+    //testing llfilter
+    isOdd c1;
+    isEven c2;
+    Node *evens = llfilter(head1, c2);
+    cout << "Filtering for evens: "<<endl;
+    print(evens);
 
+    Node *odds = llfilter(head2, c1);
+    cout << "Filtering for odds: "<<endl;
+    print(odds);
+
+		dealloc(odds);
+		dealloc(evens);
+		dealloc(smaller);
+		dealloc(larger);
     
     return 0;
 
