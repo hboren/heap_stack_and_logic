@@ -2,3 +2,7 @@ llrec-test
 llrec-test.o
 llrec.o
 stack_test
+heap_test/
+llrec-test5.in
+logicsim/plantuml.jar
+my_heap_test
